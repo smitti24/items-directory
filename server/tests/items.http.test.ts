@@ -50,6 +50,16 @@ describe("GET /api/items", () => {
   })
 })
 
+describe("GET /api/docs", () => {
+  it("serves Swagger UI", async () => {
+    const response: SuperTestResponse = await request(app).get("/api/docs/")
+
+    expect(response.status).toBe(200)
+    expect(String(response.headers["content-type"])).toMatch(/html/)
+    expect(response.text).toContain("swagger-ui")
+  })
+})
+
 describe("GET /api/health", () => {
   it("returns ok", async () => {
     const response: SuperTestResponse = await request(app).get("/api/health")

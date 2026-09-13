@@ -5,6 +5,7 @@ import { AppError } from "./errors/app-error"
 import { errorHandler } from "./middleware/error-handler"
 import { requestLogger } from "./middleware/request-logger"
 import { categoriesRouter } from "./routes/categories"
+import { docsRouter } from "./routes/docs"
 import { healthRouter } from "./routes/health"
 import { itemsRouter } from "./routes/items"
 
@@ -21,6 +22,7 @@ export function createApp(): Express {
   app.use("/api/health", healthRouter)
   app.use("/api/categories", categoriesRouter)
   app.use("/api/items", itemsRouter)
+  app.use("/api/docs", docsRouter)
 
   app.use((req: Request, _res: Response, next: NextFunction): void => {
     next(new AppError("NOT_FOUND", `Route not found: ${req.method} ${req.path}`, 404))

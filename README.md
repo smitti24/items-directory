@@ -63,4 +63,6 @@ curl "http://localhost:3000/api/items?page=2&pageSize=6"
 `order` (`asc` | `desc`), `page`, and `pageSize` (1–48, default 6). Category is a
 filter, not a search field.
 
+Swagger UI: [http://localhost:3000/api/docs/](http://localhost:3000/api/docs/).
+
 See `SOLUTION.md` for the design and the trade-offs behind it.
