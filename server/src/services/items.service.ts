@@ -1,4 +1,4 @@
-import type { CatalogItem, ListQuery, ListResponse, SortField, SortOrder } from "@items-directory/shared"
+import type { CatalogItem, ListResponse, SearchQuery, SortField, SortOrder } from "@items-directory/shared"
 import { findAllItems } from "../repositories/catalog.repository"
 
 export type ListResult = ListResponse["data"]
@@ -44,12 +44,17 @@ function sortItems(items: CatalogItem[], sort: SortField, order: SortOrder): Cat
   })
 }
 
-export function listItemsFrom(items: CatalogItem[], query: ListQuery): ListResult {
+export function listItemsFrom(items: CatalogItem[], query: SearchQuery): ListResult {
+  const inCategory: CatalogItem[] =
+    query.category === undefined
+      ? items
+      : items.filter((item: CatalogItem): boolean => item.category === query.category)
+
   const searchText: string | undefined = query.q
   const matched: CatalogItem[] =
     searchText === undefined
-      ? items
-      : items.filter((item: CatalogItem): boolean => itemMatchesQuery(item, searchText))
+      ? inCategory
+      : inCategory.filter((item: CatalogItem): boolean => itemMatchesQuery(item, searchText))
 
   const sorted: CatalogItem[] = sortItems(matched, query.sort, query.order)
   const total: number = sorted.length
@@ -66,6 +71,6 @@ export function listItemsFrom(items: CatalogItem[], query: ListQuery): ListResul
   }
 }
 
-export function listItems(query: ListQuery): ListResult {
+export function listItems(query: SearchQuery): ListResult {
   return listItemsFrom(findAllItems(), query)
 }

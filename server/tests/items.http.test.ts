@@ -3,7 +3,7 @@ import type { Express } from "express"
 import request from "supertest"
 import type { Response as SuperTestResponse } from "supertest"
 import { listResponseSchema, errorResponseSchema } from "@items-directory/shared"
-import type { ErrorResponse, ListResponse } from "@items-directory/shared"
+import type { CatalogItem, ErrorResponse, ListResponse } from "@items-directory/shared"
 import { createApp } from "../src/app"
 
 const app: Express = createApp()
@@ -23,6 +23,28 @@ describe("GET /api/items", () => {
 
   it("rejects an invalid pageSize", async () => {
     const response: SuperTestResponse = await request(app).get("/api/items").query({ pageSize: 99 })
+
+    expect(response.status).toBe(400)
+    const body: ErrorResponse = errorResponseSchema.parse(response.body)
+    expect(body.error.code).toBe("VALIDATION_ERROR")
+  })
+
+  it("filters the catalog by category", async () => {
+    const response: SuperTestResponse = await request(app)
+      .get("/api/items")
+      .query({ category: "Liquor", pageSize: 48 })
+
+    expect(response.status).toBe(200)
+    const body: ListResponse = listResponseSchema.parse(response.body)
+    expect(body.data.total).toBe(8)
+    expect(body.data.items).toHaveLength(8)
+    expect(
+      body.data.items.every((item: CatalogItem): boolean => item.category === "Liquor")
+    ).toBe(true)
+  })
+
+  it("rejects an unknown category", async () => {
+    const response: SuperTestResponse = await request(app).get("/api/items").query({ category: "Baby" })
 
     expect(response.status).toBe(400)
     const body: ErrorResponse = errorResponseSchema.parse(response.body)

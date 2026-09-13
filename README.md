@@ -40,8 +40,8 @@ One pnpm workspace, three packages:
 
 ## Current state
 
-The catalog and a basic list API are in place. Items can be searched, sorted and
-paginated. Category filtering and live Quotes land in later phases. The SvelteKit
+The catalog and list API are in place. Items can be searched, filtered by
+category, sorted and paginated. Live Quotes land in a later phase. The SvelteKit
 client is not scaffolded yet.
 
 ## Example requests
@@ -52,11 +52,13 @@ curl "http://localhost:3000/api/categories"
 curl "http://localhost:3000/api/items"
 curl "http://localhost:3000/api/items?q=ham"
 curl "http://localhost:3000/api/items?q=margherita&sort=price&order=asc"
+curl "http://localhost:3000/api/items?category=Liquor"
+curl "http://localhost:3000/api/items?q=gin&category=Liquor"
 curl "http://localhost:3000/api/items?page=2&pageSize=6"
 ```
 
-`GET /api/items` accepts `q`, `sort` (`price` | `popularity` | `name`), `order`
-(`asc` | `desc`), `page`, and `pageSize` (1–48, default 6). Category filtering is
-not implemented yet.
+`GET /api/items` accepts `q`, `category`, `sort` (`price` | `popularity` | `name`),
+`order` (`asc` | `desc`), `page`, and `pageSize` (1–48, default 6). Category is a
+filter, not a search field.
 
 See `SOLUTION.md` for the design and the trade-offs behind it.

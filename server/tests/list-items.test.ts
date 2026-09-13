@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import type { CatalogItem, ListQuery } from "@items-directory/shared"
+import type { CatalogItem, SearchQuery } from "@items-directory/shared"
 import { listItems, listItemsFrom } from "../src/services/items.service"
 import type { ListResult } from "../src/services/items.service"
 
@@ -66,9 +66,10 @@ const fixtureItems: CatalogItem[] = [
   }
 ]
 
-function query(overrides: Partial<ListQuery> = {}): ListQuery {
+function query(overrides: Partial<SearchQuery> = {}): SearchQuery {
   return {
     q: undefined,
+    category: undefined,
     sort: "popularity",
     order: "desc",
     page: 1,
@@ -77,8 +78,8 @@ function query(overrides: Partial<ListQuery> = {}): ListQuery {
   }
 }
 
-function namesOf(items: CatalogItem[], listQuery: ListQuery): string[] {
-  return listItemsFrom(items, listQuery).items.map((item: CatalogItem): string => item.name)
+function namesOf(items: CatalogItem[], searchQuery: SearchQuery): string[] {
+  return listItemsFrom(items, searchQuery).items.map((item: CatalogItem): string => item.name)
 }
 
 describe("listItems", () => {
@@ -112,5 +113,16 @@ describe("listItems", () => {
     const merchants: string[] = pizzas.map((item: CatalogItem): string => item.merchant)
 
     expect(merchants).toEqual(["Napoli Kitchen", "Doppio Zero", "Col'Cacchio"])
+  })
+
+  it("filters by category and still requires search tokens to match", () => {
+    expect(namesOf(fixtureItems, query({ category: "Liquor" }))).toEqual([
+      "London Dry Gin",
+      "Champagne Brut"
+    ])
+    expect(namesOf(fixtureItems, query({ q: "rice", category: "Groceries" }))).toEqual([
+      "Basmati Rice"
+    ])
+    expect(namesOf(fixtureItems, query({ q: "ham", category: "Liquor" }))).toEqual([])
   })
 })
