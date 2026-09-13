@@ -25,8 +25,9 @@ pnpm install
 | `pnpm build` | Build every package that defines a build script |
 | `pnpm start` | Run production builds of the API and client |
 
-The API listens on `http://localhost:3000`. The client is not scaffolded yet, so
-`pnpm dev` currently starts only the server.
+The API listens on `http://localhost:3000`. The client listens on
+`http://localhost:5173`. Copy `client/.env.example` to `client/.env` if you want
+to override `PUBLIC_API_BASE_URL`.
 
 ## Workspace
 
@@ -40,9 +41,8 @@ One pnpm workspace, three packages:
 
 ## Current state
 
-The catalog and list API are in place. Items can be searched, filtered by
-category, sorted and paginated. Live Quotes land in a later phase. The SvelteKit
-client is not scaffolded yet.
+The catalog API and a SvelteKit + Tailwind client scaffold are in place.
+Search UI and live Quotes land in later phases.
 
 ## Example requests
 
