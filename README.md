@@ -13,6 +13,7 @@ with live pricing. A SvelteKit client renders the search experience.
 
 ```bash
 pnpm install
+cp client/.env.example client/.env
 ```
 
 ## Scripts
@@ -26,8 +27,7 @@ pnpm install
 | `pnpm start` | Run production builds of the API and client |
 
 The API listens on `http://localhost:3000`. The client listens on
-`http://localhost:5173`. Copy `client/.env.example` to `client/.env` if you want
-to override `PUBLIC_API_BASE_URL`.
+`http://localhost:5173`. The client reads `PUBLIC_API_BASE_URL` from `client/.env`.
 
 ## Workspace
 

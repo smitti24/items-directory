@@ -1,4 +1,4 @@
-import { env } from "$env/dynamic/public"
+import { PUBLIC_API_BASE_URL } from "$env/static/public"
 import { errorResponseSchema, listResponseSchema } from "@items-directory/shared"
 import type { CatalogItem, ListResponse } from "@items-directory/shared"
 
@@ -18,14 +18,8 @@ export type ItemsPageError = {
 
 export type ItemsLoadResult = ItemsPage | ItemsPageError
 
-const DEFAULT_API_BASE_URL: string = "http://localhost:3000"
-
-function apiBaseUrl(): string {
-  return env.PUBLIC_API_BASE_URL ?? DEFAULT_API_BASE_URL
-}
-
 export async function fetchItemPage(fetchFn: typeof fetch): Promise<ItemsLoadResult> {
-  const url: string = `${apiBaseUrl()}/api/items`
+  const url: string = `${PUBLIC_API_BASE_URL}/api/items`
 
   try {
     const response: Response = await fetchFn(url)
@@ -61,7 +55,7 @@ export async function fetchItemPage(fetchFn: typeof fetch): Promise<ItemsLoadRes
   } catch {
     return {
       ok: false,
-      message: "Could not reach the catalog API. Is it running on port 3000?"
+      message: `Could not reach the catalog API at ${PUBLIC_API_BASE_URL}`
     }
   }
 }
