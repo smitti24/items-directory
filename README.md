@@ -41,8 +41,8 @@ One pnpm workspace, three packages:
 
 ## Current state
 
-The catalog API and a SvelteKit page are in place. Search lives in the URL.
-Category, sort, pagination and live Quotes land in later phases.
+The catalog API and a SvelteKit page are in place. Search, category, sort and
+page live in the URL. Live Quotes land in a later phase.
 
 ## Example requests
 
