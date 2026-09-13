@@ -19,10 +19,18 @@ export function list(req: Request, res: Response): void {
   }
 
   const startedAt: number = Date.now()
-  const result: ListResult = listItems(parsed.data)
+  const catalogPage: ListResult = listItems(parsed.data)
   const body: ListResponse = {
-    data: result,
-    meta: { tookMs: Date.now() - startedAt }
+    data: {
+      items: catalogPage.items,
+      page: catalogPage.page,
+      pageSize: catalogPage.pageSize,
+      total: catalogPage.total,
+      totalPages: catalogPage.totalPages
+    },
+    meta: {
+      tookMs: Date.now() - startedAt
+    }
   }
 
   res.status(200).json(body)

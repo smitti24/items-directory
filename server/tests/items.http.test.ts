@@ -2,14 +2,14 @@ import { describe, expect, it } from "vitest"
 import type { Express } from "express"
 import request from "supertest"
 import type { Response as SuperTestResponse } from "supertest"
-import { listResponseSchema, errorResponseSchema } from "@items-directory/shared"
-import type { CatalogItem, ErrorResponse, ListResponse } from "@items-directory/shared"
+import { errorResponseSchema, listResponseSchema } from "@items-directory/shared"
+import type { ErrorResponse, Item, ListResponse } from "@items-directory/shared"
 import { createApp } from "../src/app"
 
 const app: Express = createApp()
 
 describe("GET /api/items", () => {
-  it("returns a paginated catalog page", async () => {
+  it("returns a paginated catalog page with Quotes", async () => {
     const response: SuperTestResponse = await request(app).get("/api/items")
 
     expect(response.status).toBe(200)
@@ -38,9 +38,7 @@ describe("GET /api/items", () => {
     const body: ListResponse = listResponseSchema.parse(response.body)
     expect(body.data.total).toBe(8)
     expect(body.data.items).toHaveLength(8)
-    expect(
-      body.data.items.every((item: CatalogItem): boolean => item.category === "Liquor")
-    ).toBe(true)
+    expect(body.data.items.every((item: Item): boolean => item.category === "Liquor")).toBe(true)
   })
 
   it("rejects an unknown category", async () => {

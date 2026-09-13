@@ -37,26 +37,11 @@ export const quoteSchema = z.discriminatedUnion("status", [
   soldOutQuoteSchema
 ])
 
-export const quoteErrorSchema = z.enum([
-  "upstream_timeout",
-  "upstream_error"
-])
-
-export const quotedItemSchema = catalogItemSchema.extend({
-  quote: quoteSchema
+export const itemSchema = catalogItemSchema.extend({
+  quote: quoteSchema.optional()
 })
-
-export const unknownItemSchema = catalogItemSchema.extend({
-  quote: z.null(),
-  quoteError: quoteErrorSchema
-})
-
-export const itemSchema = z.union([quotedItemSchema, unknownItemSchema])
 
 export type Category = z.infer<typeof categorySchema>
 export type CatalogItem = z.infer<typeof catalogItemSchema>
 export type Quote = z.infer<typeof quoteSchema>
-export type QuoteError = z.infer<typeof quoteErrorSchema>
-export type QuotedItem = z.infer<typeof quotedItemSchema>
-export type UnknownItem = z.infer<typeof unknownItemSchema>
 export type Item = z.infer<typeof itemSchema>

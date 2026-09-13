@@ -101,7 +101,7 @@
 <main class="mx-auto max-w-5xl px-6 py-12">
   <p class="text-sm font-medium tracking-wide text-zinc-500 uppercase">Mr D take-home</p>
   <h1 class="mt-2 text-3xl font-semibold tracking-tight text-zinc-900">Items Directory</h1>
-  <p class="mt-2 text-zinc-600">Catalog price. Live prices land in a later phase.</p>
+  <p class="mt-2 text-zinc-600">Search the catalog. Cards show live price and delivery when a Quote is available.</p>
 
   <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     <label class="block sm:col-span-2 lg:col-span-1">

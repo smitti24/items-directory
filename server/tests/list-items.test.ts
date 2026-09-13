@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import type { CatalogItem, SearchQuery } from "@items-directory/shared"
+import type { CatalogItem, Item, SearchQuery } from "@items-directory/shared"
 import { listItems, listItemsFrom } from "../src/services/items.service"
 import type { ListResult } from "../src/services/items.service"
 
@@ -79,7 +79,7 @@ function query(overrides: Partial<SearchQuery> = {}): SearchQuery {
 }
 
 function namesOf(items: CatalogItem[], searchQuery: SearchQuery): string[] {
-  return listItemsFrom(items, searchQuery).items.map((item: CatalogItem): string => item.name)
+  return listItemsFrom(items, searchQuery).items.map((item: Item): string => item.name)
 }
 
 describe("listItems", () => {
@@ -109,7 +109,7 @@ describe("listItems", () => {
   })
 
   it("finds the same product from several merchants in the catalog", () => {
-    const pizzas: CatalogItem[] = listItems(query({ q: "margherita", pageSize: 48 })).items
+    const pizzas: Item[] = listItems(query({ q: "margherita", pageSize: 48 })).items
     const merchants: string[] = pizzas.map((item: CatalogItem): string => item.merchant)
 
     expect(merchants).toEqual(["Napoli Kitchen", "Doppio Zero", "Col'Cacchio"])
@@ -124,5 +124,20 @@ describe("listItems", () => {
       "Basmati Rice"
     ])
     expect(namesOf(fixtureItems, query({ q: "ham", category: "Liquor" }))).toEqual([])
+  })
+
+  it("adds a Quote when one is available", () => {
+    const items: Item[] = listItems(query({ q: "margherita", pageSize: 48 })).items
+    const napoli: Item | undefined = items.find((item: Item): boolean => item.id === "itm_001")
+    const burger: Item | undefined = listItems(query({ q: "burger", pageSize: 48 })).items.find(
+      (item: Item): boolean => item.id === "itm_004"
+    )
+
+    expect(napoli?.quote).toEqual({
+      status: "available",
+      price: 89,
+      etaMinutes: 21
+    })
+    expect(burger?.quote).toEqual({ status: "sold_out" })
   })
 })

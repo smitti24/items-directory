@@ -1,10 +1,10 @@
 import { PUBLIC_API_BASE_URL } from "$env/static/public"
 import { errorResponseSchema, listResponseSchema } from "@items-directory/shared"
-import type { CatalogItem, ListResponse } from "@items-directory/shared"
+import type { Item, ListResponse } from "@items-directory/shared"
 
 export type ItemsPage = {
   ok: true
-  items: CatalogItem[]
+  items: Item[]
   page: number
   pageSize: number
   total: number

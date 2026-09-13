@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { CatalogItem } from "@items-directory/shared"
+  import type { Item } from "@items-directory/shared"
   import ItemCard from "./ItemCard.svelte"
 
   type ItemGridProps = {
-    items: CatalogItem[]
+    items: Item[]
   }
 
   let { items }: ItemGridProps = $props()

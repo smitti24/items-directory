@@ -4,20 +4,14 @@ export {
   catalogItemSchema,
   categorySchema,
   itemSchema,
-  quoteErrorSchema,
   quoteSchema,
-  quotedItemSchema,
-  soldOutQuoteSchema,
-  unknownItemSchema
+  soldOutQuoteSchema
 } from "./item.schema"
 export type {
   CatalogItem,
   Category,
   Item,
-  Quote,
-  QuoteError,
-  QuotedItem,
-  UnknownItem
+  Quote
 } from "./item.schema"
 
 export {
@@ -29,25 +23,21 @@ export {
   SORT_FIELDS,
   SORT_ORDERS,
   categoriesResponseSchema,
-  enrichmentMetaSchema,
   healthResponseSchema,
   listQuerySchema,
   listResponseSchema,
   searchQuerySchema,
-  searchResponseSchema,
   sortFieldSchema,
   sortOrderSchema
 } from "./search.schema"
 export type {
   CategoriesResponse,
-  EnrichmentMeta,
   HealthResponse,
   ListQuery,
   ListQueryInput,
   ListResponse,
   SearchQuery,
   SearchQueryInput,
-  SearchResponse,
   SortField,
   SortOrder
 } from "./search.schema"

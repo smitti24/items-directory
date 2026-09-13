@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { catalogItemSchema, categorySchema, itemSchema } from "./item.schema"
+import { categorySchema, itemSchema } from "./item.schema"
 
 export const SORT_FIELDS = ["price", "popularity", "name"] as const
 export const SORT_ORDERS = ["asc", "desc"] as const
@@ -40,25 +40,6 @@ export const searchQuerySchema = listQuerySchema.extend({
 
 export const listResponseSchema = z.object({
   data: z.object({
-    items: z.array(catalogItemSchema),
-    page: z.number().int().min(1),
-    pageSize: z.number().int().min(1).max(MAX_PAGE_SIZE),
-    total: z.number().int().nonnegative(),
-    totalPages: z.number().int().nonnegative()
-  }),
-  meta: z.object({
-    tookMs: z.number().nonnegative()
-  })
-})
-
-export const enrichmentMetaSchema = z.object({
-  requested: z.number().int().nonnegative(),
-  quoted: z.number().int().nonnegative(),
-  failed: z.number().int().nonnegative()
-})
-
-export const searchResponseSchema = z.object({
-  data: z.object({
     items: z.array(itemSchema),
     page: z.number().int().min(1),
     pageSize: z.number().int().min(1).max(MAX_PAGE_SIZE),
@@ -66,8 +47,7 @@ export const searchResponseSchema = z.object({
     totalPages: z.number().int().nonnegative()
   }),
   meta: z.object({
-    tookMs: z.number().nonnegative(),
-    enrichment: enrichmentMetaSchema
+    tookMs: z.number().nonnegative()
   })
 })
 
@@ -88,7 +68,5 @@ export type ListQueryInput = z.input<typeof listQuerySchema>
 export type ListResponse = z.infer<typeof listResponseSchema>
 export type SearchQuery = z.output<typeof searchQuerySchema>
 export type SearchQueryInput = z.input<typeof searchQuerySchema>
-export type EnrichmentMeta = z.infer<typeof enrichmentMetaSchema>
-export type SearchResponse = z.infer<typeof searchResponseSchema>
 export type CategoriesResponse = z.infer<typeof categoriesResponseSchema>
 export type HealthResponse = z.infer<typeof healthResponseSchema>

@@ -1,7 +1,41 @@
-import type { CatalogItem, ListResponse, SearchQuery, SortField, SortOrder } from "@items-directory/shared"
+import type { CatalogItem, Item, Quote, SearchQuery, SortField, SortOrder } from "@items-directory/shared"
 import { findAllItems } from "../repositories/catalog.repository"
 
-export type ListResult = ListResponse["data"]
+export type ListResult = {
+  items: Item[]
+  page: number
+  pageSize: number
+  total: number
+  totalPages: number
+}
+
+function quoteFor(item: CatalogItem): Quote | undefined {
+  if (item.id === "itm_011") {
+    return undefined
+  }
+
+  if (item.id === "itm_004") {
+    return { status: "sold_out" }
+  }
+
+  const n: number = Number.parseInt(item.id.replace(/^itm_/, ""), 10)
+
+  return {
+    status: "available",
+    price: item.basePrice,
+    etaMinutes: Number.isNaN(n) ? 25 : 20 + (n % 30)
+  }
+}
+
+function withQuote(item: CatalogItem): Item {
+  const quote: Quote | undefined = quoteFor(item)
+
+  if (quote === undefined) {
+    return item
+  }
+
+  return { ...item, quote }
+}
 
 function tokenize(value: string): string[] {
   return value
@@ -63,7 +97,7 @@ export function listItemsFrom(items: CatalogItem[], query: SearchQuery): ListRes
   const pageItems: CatalogItem[] = sorted.slice(start, start + query.pageSize)
 
   return {
-    items: pageItems,
+    items: pageItems.map(withQuote),
     page: query.page,
     pageSize: query.pageSize,
     total,

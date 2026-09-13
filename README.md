@@ -1,8 +1,9 @@
 # Items Directory
 
 A local search and discovery slice for the Mr D Senior Front End take-home.
-An Express API searches a hand-authored catalog and enriches the current page
-with live pricing. A SvelteKit client renders the search experience.
+An Express API searches a hand-authored catalog. A SvelteKit client renders
+search, and cards show availability, price, and delivery estimate when a Quote
+is available.
 
 ## Requirements
 
@@ -42,7 +43,8 @@ One pnpm workspace, three packages:
 ## Current state
 
 The catalog API and a SvelteKit page are in place. Search, category, sort and
-page live in the URL. Live Quotes land in a later phase.
+page live in the URL. Each Item may include a Quote — availability, price, and
+delivery estimate. `itm_004` is Sold Out; `itm_011` has no Quote.
 
 ## Example requests
 
