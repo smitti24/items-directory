@@ -1,0 +1,482 @@
+[
+  {
+    "id": "itm_001",
+    "name": "Margherita Pizza",
+    "description": "Wood-fired base, San Marzano tomato, buffalo mozzarella and basil",
+    "category": "Restaurant Meals",
+    "merchant": "Napoli Kitchen",
+    "basePrice": 89,
+    "popularity": 94,
+    "tags": ["pizza", "italian", "vegetarian"]
+  },
+  {
+    "id": "itm_002",
+    "name": "Margherita Pizza",
+    "description": "Thin Roman crust, crushed tomato, fior di latte and olive oil",
+    "category": "Restaurant Meals",
+    "merchant": "Doppio Zero",
+    "basePrice": 95,
+    "popularity": 88,
+    "tags": ["pizza", "italian", "vegetarian"]
+  },
+  {
+    "id": "itm_003",
+    "name": "Margherita Pizza",
+    "description": "Classic takeaway size with mozzarella and oregano",
+    "category": "Restaurant Meals",
+    "merchant": "Col'Cacchio",
+    "basePrice": 79,
+    "popularity": 76,
+    "tags": ["pizza", "italian", "vegetarian"]
+  },
+  {
+    "id": "itm_004",
+    "name": "Beef Burger",
+    "description": "Smash patty, cheddar, pickles and secret sauce on a brioche bun",
+    "category": "Restaurant Meals",
+    "merchant": "The Burger Joint",
+    "basePrice": 119,
+    "popularity": 91,
+    "tags": ["burger", "beef"]
+  },
+  {
+    "id": "itm_005",
+    "name": "Chicken Biryani",
+    "description": "Fragrant basmati, bone-in chicken and fried onions",
+    "category": "Restaurant Meals",
+    "merchant": "Eastern Palace",
+    "basePrice": 135,
+    "popularity": 83,
+    "tags": ["biryani", "chicken", "indian"]
+  },
+  {
+    "id": "itm_006",
+    "name": "Sushi Platter",
+    "description": "Salmon, tuna and California rolls with pickled ginger and wasabi",
+    "category": "Restaurant Meals",
+    "merchant": "Tokyo Table",
+    "basePrice": 249,
+    "popularity": 72,
+    "tags": ["sushi", "japanese"]
+  },
+  {
+    "id": "itm_007",
+    "name": "Pap and Wors",
+    "description": "Soft pap, beef boerewors and tomato gravy",
+    "category": "Restaurant Meals",
+    "merchant": "Braai House",
+    "basePrice": 99,
+    "popularity": 86,
+    "tags": ["braai", "pap", "wors"]
+  },
+  {
+    "id": "itm_008",
+    "name": "Ham and Cheese Toastie",
+    "description": "Sourdough, smoked ham and mature cheddar, pressed until golden",
+    "category": "Restaurant Meals",
+    "merchant": "Cafe Roux",
+    "basePrice": 69,
+    "popularity": 64,
+    "tags": ["ham", "toastie"]
+  },
+  {
+    "id": "itm_009",
+    "name": "Extra Virgin Olive Oil",
+    "description": "Cold-pressed South African olive oil, 500ml",
+    "category": "Groceries",
+    "merchant": "Food Lover's Market",
+    "basePrice": 89.99,
+    "popularity": 70,
+    "tags": ["oil", "olive", "pantry"]
+  },
+  {
+    "id": "itm_010",
+    "name": "Basmati Rice",
+    "description": "Long-grain basmati, 2kg",
+    "category": "Groceries",
+    "merchant": "Checkers",
+    "basePrice": 54.99,
+    "popularity": 68,
+    "tags": ["rice", "grains"]
+  },
+  {
+    "id": "itm_011",
+    "name": "Liquorice Allsorts",
+    "description": "Classic layered liquorice sweets, 250g",
+    "category": "Groceries",
+    "merchant": "Sweet Shop",
+    "basePrice": 29.99,
+    "popularity": 41,
+    "tags": ["sweets", "candy"]
+  },
+  {
+    "id": "itm_012",
+    "name": "Honey Glazed Ham",
+    "description": "Sliced deli ham with a honey glaze, 400g",
+    "category": "Groceries",
+    "merchant": "Woolworths",
+    "basePrice": 189,
+    "popularity": 77,
+    "tags": ["ham", "deli"]
+  },
+  {
+    "id": "itm_013",
+    "name": "Free Range Eggs",
+    "description": "Large free range eggs, pack of 18",
+    "category": "Groceries",
+    "merchant": "Woolworths",
+    "basePrice": 42.99,
+    "popularity": 85,
+    "tags": ["eggs", "breakfast"]
+  },
+  {
+    "id": "itm_014",
+    "name": "Sourdough Loaf",
+    "description": "Stone-baked sourdough, unsliced",
+    "category": "Groceries",
+    "merchant": "The Bread Co",
+    "basePrice": 38,
+    "popularity": 73,
+    "tags": ["bread", "bakery"]
+  },
+  {
+    "id": "itm_015",
+    "name": "Full Cream Milk",
+    "description": "Fresh full cream milk, 2L",
+    "category": "Groceries",
+    "merchant": "Clover Farm",
+    "basePrice": 24.99,
+    "popularity": 90,
+    "tags": ["milk", "dairy"]
+  },
+  {
+    "id": "itm_016",
+    "name": "Mature Cheddar",
+    "description": "Aged cheddar wedge, 300g",
+    "category": "Groceries",
+    "merchant": "Dairy Belle",
+    "basePrice": 67.5,
+    "popularity": 61,
+    "tags": ["cheese", "cheddar"]
+  },
+  {
+    "id": "itm_017",
+    "name": "Champagne Brut",
+    "description": "Non-vintage brut Champagne, 750ml",
+    "category": "Liquor",
+    "merchant": "Nicolas",
+    "basePrice": 459,
+    "popularity": 55,
+    "tags": ["champagne", "sparkling"]
+  },
+  {
+    "id": "itm_018",
+    "name": "London Dry Gin",
+    "description": "Juniper-forward London dry gin, 750ml",
+    "category": "Liquor",
+    "merchant": "Liquor City",
+    "basePrice": 289,
+    "popularity": 74,
+    "tags": ["gin", "spirits"]
+  },
+  {
+    "id": "itm_019",
+    "name": "Sauvignon Blanc",
+    "description": "Crisp Stellenbosch sauvignon blanc, 750ml",
+    "category": "Liquor",
+    "merchant": "Wine Warehouse",
+    "basePrice": 99,
+    "popularity": 82,
+    "tags": ["wine", "white", "sauvignon"]
+  },
+  {
+    "id": "itm_020",
+    "name": "Sauvignon Blanc",
+    "description": "Cool-climate sauvignon blanc, 750ml",
+    "category": "Liquor",
+    "merchant": "Tops at Spar",
+    "basePrice": 109,
+    "popularity": 71,
+    "tags": ["wine", "white", "sauvignon"]
+  },
+  {
+    "id": "itm_021",
+    "name": "Craft IPA",
+    "description": "Hop-forward IPA, 440ml can",
+    "category": "Liquor",
+    "merchant": "The Local",
+    "basePrice": 39,
+    "popularity": 80,
+    "tags": ["beer", "ipa", "craft"]
+  },
+  {
+    "id": "itm_022",
+    "name": "Premium Vodka",
+    "description": "Triple-distilled vodka, 750ml",
+    "category": "Liquor",
+    "merchant": "Liquor City",
+    "basePrice": 249,
+    "popularity": 66,
+    "tags": ["vodka", "spirits"]
+  },
+  {
+    "id": "itm_023",
+    "name": "Cabernet Sauvignon",
+    "description": "Full-bodied Stellenbosch cabernet, 750ml",
+    "category": "Liquor",
+    "merchant": "Wine Warehouse",
+    "basePrice": 129,
+    "popularity": 69,
+    "tags": ["wine", "red", "cabernet"]
+  },
+  {
+    "id": "itm_024",
+    "name": "Amber Rum",
+    "description": "Aged amber rum, 750ml",
+    "category": "Liquor",
+    "merchant": "Island Cellars",
+    "basePrice": 199,
+    "popularity": 52,
+    "tags": ["rum", "spirits"]
+  },
+  {
+    "id": "itm_025",
+    "name": "Paracetamol 500mg",
+    "description": "Pain and fever tablets, pack of 20",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Clicks",
+    "basePrice": 34.99,
+    "popularity": 93,
+    "tags": ["pain", "pharmacy"]
+  },
+  {
+    "id": "itm_026",
+    "name": "SPF 50 Sunscreen",
+    "description": "High-protection facial sunscreen, 50ml",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Dis-Chem",
+    "basePrice": 129,
+    "popularity": 78,
+    "tags": ["sunscreen", "beauty"]
+  },
+  {
+    "id": "itm_027",
+    "name": "Vitamin C Tablets",
+    "description": "1000mg vitamin C, 30 tablets",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Clicks",
+    "basePrice": 79.99,
+    "popularity": 65,
+    "tags": ["vitamins", "supplements"]
+  },
+  {
+    "id": "itm_028",
+    "name": "Kids Toothpaste",
+    "description": "Fluoride toothpaste for children, 75ml",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Dis-Chem",
+    "basePrice": 49.99,
+    "popularity": 58,
+    "tags": ["toothpaste", "kids"]
+  },
+  {
+    "id": "itm_029",
+    "name": "Hand Sanitiser",
+    "description": "70% alcohol hand sanitiser, 250ml",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Clicks",
+    "basePrice": 29.99,
+    "popularity": 62,
+    "tags": ["sanitiser", "hygiene"]
+  },
+  {
+    "id": "itm_030",
+    "name": "Allergy Relief",
+    "description": "Non-drowsy antihistamine tablets, pack of 10",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Dis-Chem",
+    "basePrice": 89.99,
+    "popularity": 70,
+    "tags": ["allergy", "pharmacy"]
+  },
+  {
+    "id": "itm_031",
+    "name": "Moisturising Cream",
+    "description": "Fragrance-free daily moisturiser, 200ml",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Clicks",
+    "basePrice": 64.99,
+    "popularity": 60,
+    "tags": ["cream", "skincare"]
+  },
+  {
+    "id": "itm_032",
+    "name": "First Aid Kit",
+    "description": "Compact kit with plasters, gauze and antiseptic",
+    "category": "Pharmacy & Beauty",
+    "merchant": "Dis-Chem",
+    "basePrice": 159,
+    "popularity": 48,
+    "tags": ["firstaid", "emergency"]
+  },
+  {
+    "id": "itm_033",
+    "name": "Adult Dog Food",
+    "description": "Chicken kibble for adult dogs, 8kg",
+    "category": "Pet Supplies",
+    "merchant": "Pet Heaven",
+    "basePrice": 429,
+    "popularity": 84,
+    "tags": ["dog", "food"]
+  },
+  {
+    "id": "itm_034",
+    "name": "Adult Dog Food",
+    "description": "Chicken kibble for adult dogs, 8kg",
+    "category": "Pet Supplies",
+    "merchant": "Absolute Pets",
+    "basePrice": 399,
+    "popularity": 79,
+    "tags": ["dog", "food"]
+  },
+  {
+    "id": "itm_035",
+    "name": "Clumping Cat Litter",
+    "description": "Unscented clumping litter, 10kg",
+    "category": "Pet Supplies",
+    "merchant": "Pet Heaven",
+    "basePrice": 149,
+    "popularity": 67,
+    "tags": ["cat", "litter"]
+  },
+  {
+    "id": "itm_036",
+    "name": "Tennis Balls",
+    "description": "Pack of three durable tennis balls",
+    "category": "Pet Supplies",
+    "merchant": "Absolute Pets",
+    "basePrice": 59,
+    "popularity": 54,
+    "tags": ["dog", "toys"]
+  },
+  {
+    "id": "itm_037",
+    "name": "Bird Seed Mix",
+    "description": "Mixed seed for small birds, 2kg",
+    "category": "Pet Supplies",
+    "merchant": "Feathered Friend",
+    "basePrice": 89,
+    "popularity": 43,
+    "tags": ["bird", "seed"]
+  },
+  {
+    "id": "itm_038",
+    "name": "Aquarium Flakes",
+    "description": "Daily flake food for tropical fish, 100g",
+    "category": "Pet Supplies",
+    "merchant": "Aqua World",
+    "basePrice": 72,
+    "popularity": 39,
+    "tags": ["fish", "food"]
+  },
+  {
+    "id": "itm_039",
+    "name": "Catnip Mouse",
+    "description": "Plush mouse toy filled with catnip",
+    "category": "Pet Supplies",
+    "merchant": "Pet Heaven",
+    "basePrice": 45,
+    "popularity": 51,
+    "tags": ["cat", "toys", "catnip"]
+  },
+  {
+    "id": "itm_040",
+    "name": "Puppy Chew Treats",
+    "description": "Soft chew treats for puppies, 200g",
+    "category": "Pet Supplies",
+    "merchant": "Absolute Pets",
+    "basePrice": 99,
+    "popularity": 63,
+    "tags": ["dog", "puppy", "treats"]
+  },
+  {
+    "id": "itm_041",
+    "name": "Red Rose Bouquet",
+    "description": "Dozen long-stem red roses with seasonal foliage",
+    "category": "Flowers & Gifts",
+    "merchant": "Blooms",
+    "basePrice": 349,
+    "popularity": 87,
+    "tags": ["roses", "flowers"]
+  },
+  {
+    "id": "itm_042",
+    "name": "Red Rose Bouquet",
+    "description": "Dozen red roses wrapped in kraft paper",
+    "category": "Flowers & Gifts",
+    "merchant": "The Flower Shop",
+    "basePrice": 329,
+    "popularity": 75,
+    "tags": ["roses", "flowers"]
+  },
+  {
+    "id": "itm_043",
+    "name": "Sunflower Bunch",
+    "description": "Eight sunflowers with eucalyptus",
+    "category": "Flowers & Gifts",
+    "merchant": "Blooms",
+    "basePrice": 199,
+    "popularity": 56,
+    "tags": ["sunflowers", "flowers"]
+  },
+  {
+    "id": "itm_044",
+    "name": "Birthday Balloon Set",
+    "description": "Helium balloon bouquet with a birthday banner",
+    "category": "Flowers & Gifts",
+    "merchant": "Gift Box",
+    "basePrice": 149,
+    "popularity": 50,
+    "tags": ["balloons", "gift", "birthday"]
+  },
+  {
+    "id": "itm_045",
+    "name": "Mixed Seasonal Bouquet",
+    "description": "Mixed seasonal stems arranged in a wrapped bouquet",
+    "category": "Flowers & Gifts",
+    "merchant": "The Flower Shop",
+    "basePrice": 279,
+    "popularity": 68,
+    "tags": ["bouquet", "flowers"]
+  },
+  {
+    "id": "itm_046",
+    "name": "Chocolate Gift Box",
+    "description": "Assorted handmade chocolates, 200g",
+    "category": "Flowers & Gifts",
+    "merchant": "Sweet Sentiments",
+    "basePrice": 189,
+    "popularity": 59,
+    "tags": ["chocolate", "gift"]
+  },
+  {
+    "id": "itm_047",
+    "name": "Phalaenopsis Orchid",
+    "description": "Potted white phalaenopsis orchid",
+    "category": "Flowers & Gifts",
+    "merchant": "Blooms",
+    "basePrice": 249,
+    "popularity": 47,
+    "tags": ["orchid", "plant"]
+  },
+  {
+    "id": "itm_048",
+    "name": "White Lilies",
+    "description": "White oriental lilies, bunch of five stems",
+    "category": "Flowers & Gifts",
+    "merchant": "The Flower Shop",
+    "basePrice": 299,
+    "popularity": 44,
+    "tags": ["lilies", "flowers"]
+  }
+]
