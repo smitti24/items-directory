@@ -1,0 +1,19 @@
+{
+  "name": "items-directory",
+  "private": true,
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"pnpm --filter @items-directory/server --if-present dev\" \"pnpm --filter @items-directory/client --if-present dev\"",
+    "build": "pnpm -r --if-present build",
+    "start": "concurrently -n server,client -c blue,magenta \"pnpm --filter @items-directory/server --if-present start\" \"pnpm --filter @items-directory/client --if-present start\"",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "10.0.5",
+    "typescript": "6.0.3"
+  }
+}

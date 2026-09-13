@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.svelte-kit
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+coverage
+CLAUDE.md
