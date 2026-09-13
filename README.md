@@ -41,8 +41,8 @@ One pnpm workspace, three packages:
 
 ## Current state
 
-The catalog API and a SvelteKit + Tailwind client scaffold are in place.
-Search UI and live Quotes land in later phases.
+The catalog API and a SvelteKit page that loads the first catalog page are in
+place. Search, filter, sort and live Quotes land in later phases.
 
 ## Example requests
 
