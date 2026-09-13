@@ -25,8 +25,8 @@ pnpm install
 | `pnpm build` | Build every package that defines a build script |
 | `pnpm start` | Run production builds of the API and client |
 
-`dev` and `start` become meaningful once the server and client packages implement
-those scripts.
+The API listens on `http://localhost:3000`. The client is not scaffolded yet, so
+`pnpm dev` currently starts only the server.
 
 ## Workspace
 
@@ -40,9 +40,23 @@ One pnpm workspace, three packages:
 
 ## Current state
 
-The workspace and shared Zod contract are in place. The catalog is 48 hand-authored
-Items in `server/src/data/catalog.json`, validated against `catalogItemSchema` when
-the server package loads. The search API and SvelteKit client land in later phases.
-Example API requests will be added here when the search route exists.
+The catalog and a basic list API are in place. Items can be searched, sorted and
+paginated. Category filtering and live Quotes land in later phases. The SvelteKit
+client is not scaffolded yet.
+
+## Example requests
+
+```bash
+curl "http://localhost:3000/api/health"
+curl "http://localhost:3000/api/categories"
+curl "http://localhost:3000/api/items"
+curl "http://localhost:3000/api/items?q=ham"
+curl "http://localhost:3000/api/items?q=margherita&sort=price&order=asc"
+curl "http://localhost:3000/api/items?page=2&pageSize=6"
+```
+
+`GET /api/items` accepts `q`, `sort` (`price` | `popularity` | `name`), `order`
+(`asc` | `desc`), `page`, and `pageSize` (1–48, default 6). Category filtering is
+not implemented yet.
 
 See `SOLUTION.md` for the design and the trade-offs behind it.

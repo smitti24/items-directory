@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { categorySchema, itemSchema } from "./item.schema"
+import { catalogItemSchema, categorySchema, itemSchema } from "./item.schema"
 
 export const SORT_FIELDS = ["price", "popularity", "name"] as const
 export const SORT_ORDERS = ["asc", "desc"] as const
@@ -21,9 +21,8 @@ function emptyToUndefined(value: string | undefined): string | undefined {
   return value
 }
 
-export const searchQuerySchema = z.object({
+export const listQuerySchema = z.object({
   q: z.string().trim().optional().transform(emptyToUndefined),
-  category: categorySchema.optional(),
   sort: sortFieldSchema.default(DEFAULT_SORT),
   order: sortOrderSchema.default(DEFAULT_ORDER),
   page: z.coerce.number().int().min(1).default(DEFAULT_PAGE),
@@ -33,6 +32,23 @@ export const searchQuerySchema = z.object({
     .min(1)
     .max(MAX_PAGE_SIZE)
     .default(DEFAULT_PAGE_SIZE)
+})
+
+export const searchQuerySchema = listQuerySchema.extend({
+  category: categorySchema.optional()
+})
+
+export const listResponseSchema = z.object({
+  data: z.object({
+    items: z.array(catalogItemSchema),
+    page: z.number().int().min(1),
+    pageSize: z.number().int().min(1).max(MAX_PAGE_SIZE),
+    total: z.number().int().nonnegative(),
+    totalPages: z.number().int().nonnegative()
+  }),
+  meta: z.object({
+    tookMs: z.number().nonnegative()
+  })
 })
 
 export const enrichmentMetaSchema = z.object({
@@ -67,6 +83,9 @@ export const healthResponseSchema = z.object({
 
 export type SortField = z.infer<typeof sortFieldSchema>
 export type SortOrder = z.infer<typeof sortOrderSchema>
+export type ListQuery = z.output<typeof listQuerySchema>
+export type ListQueryInput = z.input<typeof listQuerySchema>
+export type ListResponse = z.infer<typeof listResponseSchema>
 export type SearchQuery = z.output<typeof searchQuerySchema>
 export type SearchQueryInput = z.input<typeof searchQuerySchema>
 export type EnrichmentMeta = z.infer<typeof enrichmentMetaSchema>
