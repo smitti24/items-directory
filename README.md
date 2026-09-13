@@ -40,8 +40,8 @@ One pnpm workspace, three packages:
 
 ## Current state
 
-The workspace is scaffolded. The catalog, search API, and SvelteKit client land
-in later phases. Example API requests will be added here when the search route
-exists.
+The workspace is scaffolded and the shared Zod contract lives in `shared/src`.
+The catalog, search API, and SvelteKit client land in later phases. Example API
+requests will be added here when the search route exists.
 
 See `SOLUTION.md` for the design and the trade-offs behind it.
