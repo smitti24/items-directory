@@ -1,10 +1,37 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation"
+  import { goto, invalidateAll } from "$app/navigation"
+  import { page } from "$app/state"
+  import { onDestroy } from "svelte"
   import type { PageProps } from "./$types"
   import ItemGrid from "$lib/components/ItemGrid.svelte"
   import StatusPanel from "$lib/components/StatusPanel.svelte"
+  import { debounce } from "$lib/utils/debounce"
+
+  const SEARCH_DEBOUNCE_MS: number = 300
 
   let { data }: PageProps = $props()
+
+  const urlQ: string = $derived(page.url.searchParams.get("q") ?? "")
+  let draftQ: string = $state(page.url.searchParams.get("q") ?? "")
+
+  $effect((): void => {
+    draftQ = urlQ
+  })
+
+  const runSearch: ReturnType<typeof debounce<[string]>> = debounce((value: string): void => {
+    const href: string = value === "" ? "/" : `/?${new URLSearchParams({ q: value }).toString()}`
+    void goto(href, { replaceState: true, keepFocus: true, noScroll: true })
+  }, SEARCH_DEBOUNCE_MS)
+
+  onDestroy((): void => {
+    runSearch.cancel()
+  })
+
+  function onSearchInput(event: Event): void {
+    const target: HTMLInputElement = event.currentTarget as HTMLInputElement
+    draftQ = target.value
+    runSearch(draftQ)
+  }
 
   function retry(): void {
     void invalidateAll()
@@ -20,13 +47,24 @@
   <h1 class="mt-2 text-3xl font-semibold tracking-tight text-zinc-900">Items Directory</h1>
   <p class="mt-2 text-zinc-600">Catalog price. Live prices land in a later phase.</p>
 
+  <label class="mt-8 block max-w-xl">
+    <span class="mb-1 block text-sm font-medium text-zinc-700">Search</span>
+    <input
+      type="search"
+      class="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm text-zinc-900"
+      placeholder="Name, merchant or tag"
+      value={draftQ}
+      oninput={onSearchInput}
+    />
+  </label>
+
   <section class="mt-8">
     {#if data.ok}
       {#if data.items.length === 0}
         <StatusPanel
           variant="empty"
           title="No items found"
-          message="Nothing in the catalog matches this page."
+          message="Nothing in the catalog matches this search."
         />
       {:else}
         <ItemGrid items={data.items} />

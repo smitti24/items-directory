@@ -18,8 +18,11 @@ export type ItemsPageError = {
 
 export type ItemsLoadResult = ItemsPage | ItemsPageError
 
-export async function fetchItemPage(fetchFn: typeof fetch): Promise<ItemsLoadResult> {
-  const url: string = `${PUBLIC_API_BASE_URL}/api/items`
+export async function fetchItemPage(
+  fetchFn: typeof fetch,
+  search: string
+): Promise<ItemsLoadResult> {
+  const url: string = `${PUBLIC_API_BASE_URL}/api/items${search}`
 
   try {
     const response: Response = await fetchFn(url)
