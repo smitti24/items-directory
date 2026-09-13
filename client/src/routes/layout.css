@@ -1,1 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-mrd-sky-700: #0b7fae;
+  --color-mrd-sky-600: #35a9da;
+  --color-mrd-sky-500: #4fbdea;
+  --color-mrd-sky: #6ecff5;
+  --color-mrd-sky-100: #d7f0fc;
+  --color-mrd-sky-50: #eef9fe;
+  --color-mrd-ink-900: #101113;
+  --color-mrd-ink-700: #33373d;
+  --color-mrd-ink-500: #62686f;
+  --color-mrd-ink-400: #8c9299;
+  --color-mrd-page: #f5f7f8;
+  --color-mrd-surface: #ffffff;
+  --color-mrd-line: #e6eaec;
+  --color-mrd-line-strong: #ced5d9;
+  --color-mrd-green-600: #0a7a4e;
+  --color-mrd-green-50: #e6f5ee;
+  --color-mrd-amber-600: #9a5b00;
+  --color-mrd-amber-50: #fdf2e1;
+  --color-mrd-red-600: #c22b28;
+  --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(16, 17, 19, 0.05);
+  --shadow-card-hover: 0 2px 8px rgba(16, 17, 19, 0.06), 0 12px 28px rgba(16, 17, 19, 0.06);
+}
+
+body {
+  @apply m-0 bg-mrd-page font-sans text-[15px] leading-normal text-mrd-ink-700 antialiased;
+}
+
+:where(button, input, select, a, [tabindex]):focus-visible {
+  @apply outline-2 outline-offset-2 outline-mrd-sky-700;
+}
+
+::selection {
+  @apply bg-mrd-sky-100 text-mrd-ink-900;
+}
+
+.select-chevron {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-mrd-ink-700) 50%),
+    linear-gradient(135deg, var(--color-mrd-ink-700) 50%, transparent 50%);
+  background-position: calc(100% - 22px) 20px, calc(100% - 17px) 20px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #edf0f2 25%, #f7f9fa 37%, #edf0f2 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  @apply rounded-sm;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

@@ -4,15 +4,17 @@
 
   type ItemGridProps = {
     items: Item[]
+    highlight: string
+    busy: boolean
   }
 
-  let { items }: ItemGridProps = $props()
+  let { items, highlight, busy }: ItemGridProps = $props()
 </script>
 
-<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<div
+  class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 {busy ? 'opacity-55' : ''}"
+>
   {#each items as item (item.id)}
-    <li>
-      <ItemCard {item} />
-    </li>
+    <ItemCard {item} {highlight} />
   {/each}
-</ul>
+</div>
