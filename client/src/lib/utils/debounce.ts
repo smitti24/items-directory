@@ -1,30 +1,21 @@
-export type Debounced<TArgs extends unknown[]> = ((...args: TArgs) => void) & {
+export type Debounced = {
+  run: (value: string) => void
   cancel: () => void
 }
 
-export function debounce<TArgs extends unknown[]>(
-  fn: (...args: TArgs) => void,
-  waitMs: number
-): Debounced<TArgs> {
-  let timer: ReturnType<typeof setTimeout> | undefined
+export function debounce(fn: (value: string) => void, waitMs: number): Debounced {
+  let timer: number = 0
 
-  const run: Debounced<TArgs> = (...args: TArgs): void => {
-    if (timer !== undefined) {
-      clearTimeout(timer)
-    }
-
-    timer = setTimeout((): void => {
-      timer = undefined
-      fn(...args)
+  function run(value: string): void {
+    clearTimeout(timer)
+    timer = window.setTimeout((): void => {
+      fn(value)
     }, waitMs)
   }
 
-  run.cancel = (): void => {
-    if (timer !== undefined) {
-      clearTimeout(timer)
-      timer = undefined
-    }
+  function cancel(): void {
+    clearTimeout(timer)
   }
 
-  return run
+  return { run, cancel }
 }

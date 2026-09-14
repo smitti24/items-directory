@@ -13,7 +13,7 @@
   import type { CatalogQuery } from "$lib/catalog-href"
   import ItemGrid from "$lib/components/ItemGrid.svelte"
   import StatusPanel from "$lib/components/StatusPanel.svelte"
-  import { debounce } from "$lib/utils/debounce"
+  import { debounce, type Debounced } from "$lib/utils/debounce"
 
   const SEARCH_DEBOUNCE_MS: number = 300
   const BUSY_MIN_MS: number = 180
@@ -49,7 +49,7 @@
     draftQ = q
   })
 
-  const runSearch: ReturnType<typeof debounce<[string]>> = debounce((value: string): void => {
+  const runSearch: Debounced = debounce((value: string): void => {
     go(hrefFrom({ q: value, page: DEFAULT_PAGE }), true)
   }, SEARCH_DEBOUNCE_MS)
 
@@ -94,7 +94,7 @@
   function onSearchInput(event: Event): void {
     const target: HTMLInputElement = event.currentTarget as HTMLInputElement
     draftQ = target.value
-    runSearch(draftQ)
+    runSearch.run(draftQ)
   }
 
   function onCategoryChange(event: Event): void {

@@ -18,10 +18,9 @@ export type ItemsPageError = {
 
 export type ItemsLoadResult = ItemsPage | ItemsPageError
 
-export async function fetchItemPage(
-  fetchFn: typeof fetch,
-  search: string
-): Promise<ItemsLoadResult> {
+type FetchFn = (url: string) => Promise<Response>
+
+export async function fetchItemPage(fetchFn: FetchFn, search: string): Promise<ItemsLoadResult> {
   const url: string = `${PUBLIC_API_BASE_URL}/api/items${search}`
 
   try {
@@ -29,8 +28,7 @@ export async function fetchItemPage(
     const json: unknown = await response.json()
 
     if (!response.ok) {
-      const parsed: ReturnType<typeof errorResponseSchema.safeParse> =
-        errorResponseSchema.safeParse(json)
+      const parsed = errorResponseSchema.safeParse(json)
       const message: string = parsed.success
         ? parsed.data.error.message
         : "The catalog request failed"
@@ -38,8 +36,7 @@ export async function fetchItemPage(
       return { ok: false, message }
     }
 
-    const parsedBody: ReturnType<typeof listResponseSchema.safeParse> =
-      listResponseSchema.safeParse(json)
+    const parsedBody = listResponseSchema.safeParse(json)
 
     if (!parsedBody.success) {
       return { ok: false, message: "The catalog response did not match the expected shape" }
