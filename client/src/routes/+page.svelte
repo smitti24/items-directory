@@ -16,6 +16,7 @@
   import { debounce } from "$lib/utils/debounce"
 
   const SEARCH_DEBOUNCE_MS: number = 300
+  const BUSY_MIN_MS: number = 180
   const skeletonSlots: number[] = [0, 1, 2, 3, 4, 5]
 
   const sortChoices: { value: string; label: string }[] = [
@@ -36,11 +37,13 @@
     Number(page.url.searchParams.get("page") ?? DEFAULT_PAGE) || DEFAULT_PAGE
   )
   const sortValue: string = $derived(`${sort}:${order}`)
-  const isBusy: boolean = $derived(navigating.to !== null)
-  const showSkeletons: boolean = $derived(isBusy && !(data.ok && data.items.length > 0))
   const emptyQuery: string = $derived(q === "" ? "this search" : `“${q}”`)
 
   let draftQ: string = $state(page.url.searchParams.get("q") ?? "")
+  let pending: boolean = $state(false)
+
+  const isBusy: boolean = $derived(pending || navigating.to !== null)
+  const showSkeletons: boolean = $derived(isBusy)
 
   $effect((): void => {
     draftQ = q
@@ -65,8 +68,27 @@
     })
   }
 
+  async function withBusy(work: Promise<void>): Promise<void> {
+    pending = true
+    const startedAt: number = Date.now()
+
+    try {
+      await work
+    } finally {
+      const remaining: number = BUSY_MIN_MS - (Date.now() - startedAt)
+
+      if (remaining > 0) {
+        await new Promise((resolve: (value: void) => void): void => {
+          setTimeout(resolve, remaining)
+        })
+      }
+
+      pending = false
+    }
+  }
+
   function go(href: string, replaceState: boolean): void {
-    void goto(href, { replaceState, keepFocus: true, noScroll: true })
+    void withBusy(goto(href, { replaceState, keepFocus: true, noScroll: true }))
   }
 
   function onSearchInput(event: Event): void {
@@ -111,7 +133,7 @@
   }
 
   function retry(): void {
-    void invalidateAll()
+    void withBusy(invalidateAll())
   }
 </script>
 
@@ -173,12 +195,12 @@
     <p class="m-0 text-mrd-ink-500">Sorted on catalog price. Live prices may differ.</p>
   {/if}
 
-  <section class="flex flex-col gap-8">
+  <section class="flex flex-col gap-8" aria-busy={isBusy}>
     {#if showSkeletons}
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4" role="status">
         {#each skeletonSlots as slot (slot)}
           <article
-            class="flex flex-col gap-2 rounded-lg border border-mrd-line bg-mrd-surface p-4 shadow-card"
+            class="flex min-h-[188px] flex-col gap-2 rounded-lg border border-mrd-line bg-mrd-surface p-4 shadow-card"
             aria-hidden="true"
           >
             <div class="skeleton" style="width:35%;height:12px"></div>
@@ -198,30 +220,7 @@
           onaction={clearFilters}
         />
       {:else}
-        <ItemGrid items={data.items} highlight={q} busy={isBusy} />
-      {/if}
-      {#if data.totalPages > 0}
-        <nav class="flex items-center justify-between gap-4">
-          <button
-            type="button"
-            class="inline-flex h-11 items-center justify-center rounded-pill border border-mrd-line-strong bg-mrd-surface px-6 text-[13px] font-bold text-mrd-ink-900 hover:border-mrd-ink-900 disabled:cursor-not-allowed disabled:opacity-40"
-            disabled={data.page <= 1}
-            onclick={(): void => onPageChange(data.page - 1)}
-          >
-            Previous
-          </button>
-          <p class="text-[13px] text-mrd-ink-500" role="status">
-            Page {data.page} of {data.totalPages} · {data.total} items
-          </p>
-          <button
-            type="button"
-            class="inline-flex h-11 items-center justify-center rounded-pill border border-mrd-line-strong bg-mrd-surface px-6 text-[13px] font-bold text-mrd-ink-900 hover:border-mrd-ink-900 disabled:cursor-not-allowed disabled:opacity-40"
-            disabled={data.page >= data.totalPages}
-            onclick={(): void => onPageChange(data.page + 1)}
-          >
-            Next
-          </button>
-        </nav>
+        <ItemGrid items={data.items} highlight={q} />
       {/if}
     {:else}
       <StatusPanel
@@ -231,6 +230,29 @@
         actionLabel="Retry"
         onaction={retry}
       />
+    {/if}
+    {#if data.ok && data.totalPages > 0}
+      <nav class="flex items-center justify-between gap-4">
+        <button
+          type="button"
+          class="inline-flex h-11 items-center justify-center rounded-pill border border-mrd-line-strong bg-mrd-surface px-6 text-[13px] font-bold text-mrd-ink-900 hover:border-mrd-ink-900 disabled:cursor-not-allowed disabled:opacity-40"
+          disabled={data.page <= 1}
+          onclick={(): void => onPageChange(data.page - 1)}
+        >
+          Previous
+        </button>
+        <p class="text-[13px] text-mrd-ink-500" role="status">
+          Page {data.page} of {data.totalPages} · {data.total} items
+        </p>
+        <button
+          type="button"
+          class="inline-flex h-11 items-center justify-center rounded-pill border border-mrd-line-strong bg-mrd-surface px-6 text-[13px] font-bold text-mrd-ink-900 hover:border-mrd-ink-900 disabled:cursor-not-allowed disabled:opacity-40"
+          disabled={data.page >= data.totalPages}
+          onclick={(): void => onPageChange(data.page + 1)}
+        >
+          Next
+        </button>
+      </nav>
     {/if}
   </section>
 </main>
